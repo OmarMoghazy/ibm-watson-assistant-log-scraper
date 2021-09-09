@@ -1,0 +1,5 @@
+chatbot_logs.txt
+*~
+*.swp
+*.swo
+config.sh
