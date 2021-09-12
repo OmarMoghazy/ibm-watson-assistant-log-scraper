@@ -1,7 +1,12 @@
 # IBM Watson Assistant Lite Log Scraper
 A script to get the chatbot logs from Watson Assistant Lite analytics and parse them into a suitable representation. 
 
-## Steps to use:
+
+## Part 1: Getting the raw log entries.
+
+For help with the `get_logs.sh` script, do `./get_logs.sh -h`. 
+
+### Steps:
 1. Create `config.sh` in the same directory as `get_logs.sh`
 2. Copy the below template for `config.sh`:
 ```
