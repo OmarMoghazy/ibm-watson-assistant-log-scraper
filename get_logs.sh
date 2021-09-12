@@ -6,11 +6,31 @@ source config.sh
 
 function usage {
 	echo "Usage: ./get_logs.sh [-a <api key>] [-u <url>] [-s <skill id>] [-v <api version>] [-p <page limit>]"
-	echo "	-a <api key>, --api-key <api key>		The API key for the IBM Watson Assistant Service. Get this from the IBM Watson Assistant service instance on IBM Cloud."
-	echo "	-u <url>, --url <url>				The URL for the IBM Watson Assistant Service. Get this from the IBM Watson Assistant service instance on IBM Cloud."
-	echo "	-s <skill id>, --skill-id <skill id>		The skill ID is a unique identifier for the dialog skill used for the chatbot. It can be obtained from within watson assistant on IBM Cloud"
-	echo "	-v <api version>, --api-version	<api version>	The date of the api version used to get the logs"
-	echo "	-p <page limit>, --page-limit <page limit>	The maximum number of log entries to retrieve in one request"
+	echo "	-a <api key>, --api-key <api key>		The API key for the IBM Watson Assistant Service.
+							Get this from the IBM Watson Assistant service
+						       	instance on IBM Cloud."
+	echo "	-u <url>, --url <url>				The URL for the IBM Watson Assistant Service. 
+							Get this from the IBM Watson Assistant service
+						       	instance on IBM Cloud."
+	echo "	-s <skill id>, --skill-id <skill id>		The skill ID is a unique identifier for the dialog
+       							skill used for the chatbot.
+							It can be obtained from within Watson Assistant on 
+							IBM Cloud on the dialog skill you want to use."
+	echo "	-v <api version>, --api-version	<api version>	Release date of the API version you want to use.
+							Specify dates in YYYY-MM-DD format. The current
+						       	version	is 2021-06-14."
+	echo "	-p <page limit>, --page-limit <page limit>	The maximum number of log entries to return in
+       							the results."
+	echo "	-h <page limit>, --help				Display the help message."
+}
+
+function help {
+	echo "This tool gets the logs from IBM Watson Assistant analytics for the past 7 days.This requires five
+credentials: The API key, the Watson Assistant URL, the dialog skill ID, the API version release date and
+the page limit."
+	echo
+	usage
+	exit 1
 }
 
 while [ "${1:-}" != "" ]; do
@@ -35,6 +55,11 @@ while [ "${1:-}" != "" ]; do
         shift
         PAGE_LIMIT=$1
         ;;
+	"-h" | "--help")
+        shift
+        help
+        ;;
+
     esac
     shift
   done
