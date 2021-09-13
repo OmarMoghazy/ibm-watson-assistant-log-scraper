@@ -78,5 +78,8 @@ then
 else
 	echo # get the log file
 	today=$(date +"%Y-%m-%d")
-	curl -u "apikey:$API_KEY" "$URL/v1/workspaces/$SKILL_ID/logs?version=$API_VERSION&page_limit=$PAGE_LIMIT" > "./logs/logs_${today}.txt" > ./chatbot_logs.txt
+	curl -u "apikey:$API_KEY" "$URL/v1/workspaces/$SKILL_ID/logs?version=$API_VERSION&page_limit=$PAGE_LIMIT" > ./chatbot_logs.txt
+	cp "./chatbot_logs.txt"  "./logs/logs_${today}.txt"
+	python3 scraper.py
+	
 fi
