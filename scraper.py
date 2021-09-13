@@ -5,7 +5,7 @@ from datetime import datetime
 with open('./chatbot_logs.txt') as f:
   data = json.load(f)
 
-df = pd.DataFrame(columns=['request_txt', 'conversation_id', 'request_timestamp', 'responses', 'intents', 'entities'])
+df = pd.DataFrame(columns=['request_txt', 'conversation_id', 'request_timestamp', 'responses', 'intent', 'intent_confidence', 'entities'])
 
 count = 0
 for i, entry in zip(range(len(data['logs'])), data['logs']):
@@ -13,10 +13,15 @@ for i, entry in zip(range(len(data['logs'])), data['logs']):
     conversation_id = (entry['request']['context']['conversation_id'])
     request_timestamp = (entry['request_timestamp'])
     responses = (entry['response']['output']['text'])
-    intents = entry['response']['intents']
+    if len(entry['response']['intents']):
+        intent = entry['response']['intents'][0]['intent']
+        intent_confidence = entry['response']['intents'][0]['confidence']
+    else:
+        intent = ""
+        intent_confidence = ""
     entities = entry['response']['entities']
 
-    df.loc[i] = {'request_txt':request_txt, 'conversation_id':conversation_id, 'request_timestamp':request_timestamp, 'responses':responses, 'intents':intents, 'entities': entities}
+    df.loc[i] = {'request_txt':request_txt, 'conversation_id':conversation_id, 'request_timestamp':request_timestamp, 'responses':responses, 'intent':intent, 'intent_confidence':intent_confidence, 'entities': entities}
 
     count += 1
 date = datetime.now().strftime("%Y-%m-%d")
