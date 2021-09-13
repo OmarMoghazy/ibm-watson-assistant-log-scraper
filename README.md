@@ -1,12 +1,9 @@
 # IBM Watson Assistant Lite Log Scraper
 A script to get the chatbot logs from Watson Assistant Lite analytics and parse them into a suitable representation. 
 
-
-## Part 1: Getting the raw log entries.
-
 For help with the `get_logs.sh` script, do `./get_logs.sh -h`. 
 
-### Steps:
+## Steps:
 1. Create `config.sh` in the same directory as `get_logs.sh`
 2. Copy the below template for `config.sh`:
 ```
@@ -28,18 +25,6 @@ PAGE_LIMIT=
 * `-p` or `--page-limit`: The maximum number of log entries to return in the results.
 
 The output of `get_logs.sh` will be saved to `chatbot_logs.txt` in the same directory, and another copy will be saved to the `logs` directory titles `logs_YYYY-mm-dd.txt`. The `chatbot_logs.txt` file will be overwritten every time this script is run and is used to store the logs to be used in the python log scraping script.
-
-## Part 2: Log Scraping
-
-### Steps:
-1. Use `pip` to install the required dependencies
-```
-pip install -r requirements.txt
-```
-2. Run `scraper.py`
-```
-python3 scraper.py
-```
 
 A csv file titled `output_YYY-mm-dd.csv` will be saved to the `csv` directory.
 
