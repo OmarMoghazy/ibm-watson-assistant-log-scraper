@@ -9,9 +9,9 @@ df = pd.DataFrame(columns=['request_txt', 'conversation_id', 'request_timestamp'
 
 count = 0
 for i, entry in zip(range(len(data['logs'])), data['logs']):
-    request_txt = (entry['request']['input']['text']).encode('utf-8') 
-    conversation_id = (entry['request']['context']['conversation_id']).encode('utf-8')
-    request_timestamp = (entry['request_timestamp']).encode('utf-8')
+    request_txt = (entry['request']['input']['text'])
+    conversation_id = (entry['request']['context']['conversation_id'])
+    request_timestamp = (entry['request_timestamp'])
     responses = (entry['response']['output']['text'])
     intents = entry['response']['intents']
     entities = entry['response']['entities']
