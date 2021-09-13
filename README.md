@@ -27,4 +27,25 @@ PAGE_LIMIT=
 * `-v` or `--api-version`: The release date in `yyyy-mm-dd` format of the API version you would like to use. The latest version is `2021-06-14`.
 * `-p` or `--page-limit`: The maximum number of log entries to return in the results.
 
-The output of `get_logs.sh` will be saved to `chatbot_logs.txt` in the same directory.
+The output of `get_logs.sh` will be saved to `chatbot_logs.txt` in the same directory, and another copy will be saved to the `logs` directory titles `logs_YYYY-mm-dd.txt`. The `chatbot_logs.txt` file will be overwritten every time this script is run and is used to store the logs to be used in the python log scraping script.
+
+## Part 2: Log Scraping
+
+### Steps:
+1. Use `pip` to install the required dependencies
+```
+pip install -r requirements.txt
+```
+2. Run `scraper.py`
+```
+python3 scraper.py
+```
+
+A csv file titled `output_YYY-mm-dd.csv` will be saved to the `csv` directory.
+
+The generated csv file for each run contains the following fields for every entry (representing an API call to the chatbot):
+* `request_txt`: The input text supplied to the chatbot by the user.
+* `conversation_id`: A unique number for every "conversation" that a user has with the chatbot. A conversation can hold multiple API calls.
+* `responses`: The responses that the chatbot replies with to the user.
+* `intents`: The detected intents and the confidence level for each of them.
+* `entities`: The detected entities, their values and the confidence level for each of them.
