@@ -1,36 +1,21 @@
 import json
-# a Python object (dict):
+import pandas as pd
+
 with open('./chatbot_logs.txt') as f:
   data = json.load(f)
 
+df = pd.DataFrame(columns=['request_txt', 'conversation_id', 'request_timestamp', 'responses', 'intents', 'entities'])
+
 count = 0
-for entry in data['logs']:
-    print("\n\n\t\t ***** New Message of id: " + str(count) + " ***** \n")
-    # requested message
-    print("Requested message: ")
-    print("\t" + (entry['request']['input']['text']).encode('utf-8'))
-    # Conversation ID
-    print("\nConversation ID: ")
-    print("\t" + (entry['request']['context']['conversation_id']).encode('utf-8'))
-    # Request timestamp
-    print("\nRequest timestamp: ")
-    print("\t" + (entry['request_timestamp']).encode('utf-8'))
+for i, entry in zip(range(len(data['logs'])), data['logs']):
+    request_txt = (entry['request']['input']['text']).encode('utf-8') 
+    conversation_id = (entry['request']['context']['conversation_id']).encode('utf-8')
+    request_timestamp = (entry['request_timestamp']).encode('utf-8')
+    responses = (entry['response']['output']['text'])
+    intents = entry['response']['intents']
+    entities = entry['response']['entities']
 
-    # Response text msg
-    print("\nResponse text msg: ")
-    print("\t" + str(entry['response']['output']['text']))
-
-    # Intent
-    print("\nDetected Intent: ")
-    print("\t" + str(entry['response']['intents']))
-
-    print("\nEntities: ")
-    for entity in entry['response']['entities']:
-        print("\tEntity: ")
-        print("\t\t" + (entity['entity']).encode('utf-8'))
-        print("\tValue: ")
-        print("\t\t" + (entity['value']).encode('utf-8'))
-        print("\tConfidence: ")
-        print("\t\t" + str(entity['confidence']))
+    df.loc[i] = {'request_txt':request_txt, 'conversation_id':conversation_id, 'request_timestamp':request_timestamp, 'responses':responses, 'intents':intents, 'entities': entities}
 
     count += 1
+df.to_csv('output.csv')
