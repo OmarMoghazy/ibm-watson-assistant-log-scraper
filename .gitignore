@@ -2,4 +2,6 @@ chatbot_logs.txt
 *~
 *.swp
 *.swo
+*.txt
+*.csv
 config.sh

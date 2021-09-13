@@ -77,5 +77,6 @@ then
 	usage
 else
 	echo # get the log file
-	curl -u "apikey:$API_KEY" "$URL/v1/workspaces/$SKILL_ID/logs?version=$API_VERSION&page_limit=$PAGE_LIMIT" > ./chatbot_logs.txt
+	today=$(date +"%Y-%m-%d")
+	curl -u "apikey:$API_KEY" "$URL/v1/workspaces/$SKILL_ID/logs?version=$API_VERSION&page_limit=$PAGE_LIMIT" > "./logs/logs_${today}.txt" > ./chatbot_logs.txt
 fi

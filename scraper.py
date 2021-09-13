@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+from datetime import datetime
 
 with open('./chatbot_logs.txt') as f:
   data = json.load(f)
@@ -18,4 +19,5 @@ for i, entry in zip(range(len(data['logs'])), data['logs']):
     df.loc[i] = {'request_txt':request_txt, 'conversation_id':conversation_id, 'request_timestamp':request_timestamp, 'responses':responses, 'intents':intents, 'entities': entities}
 
     count += 1
-df.to_csv('output.csv')
+date = datetime.now().strftime("%Y-%m-%d")
+df.to_csv('./csv/output_' + date + '.csv')
