@@ -5,3 +5,5 @@ chatbot_logs.txt
 *.txt
 *.csv
 config.sh
+
+!requirements.txt
